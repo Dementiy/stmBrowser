@@ -92,9 +92,9 @@ stmBrowser <- function(mod, data, covariates, text, id=NULL, n=1000,
         for(j in 1:ncol(theta)){
             doc[paste("Topic", j)] <- theta[i,j]
         }
-        if (i!=nrow(data)) start <- paste(start, rjson::toJSON(doc), ",",
+        if (i!=nrow(data)) start <- paste(start, jsonlite::toJSON(doc), ",",
                 sep="")
-        if (i==nrow(data)) start <- paste(start, rjson::toJSON(doc), "]", sep="")
+        if (i==nrow(data)) start <- paste(start, jsonlite::toJSON(doc), "]", sep="")
     }
     fileConn <- file("output.js")
     writeLines(start, fileConn)
@@ -107,9 +107,9 @@ stmBrowser <- function(mod, data, covariates, text, id=NULL, n=1000,
         topic$name <- paste("Topic", i)
         topic$list <- paste(topics[i,], collapse=", ")
         if (i!=nrow(topics)) start <- paste(start,
-                rjson::toJSON(topic), ",",
+                jsonlite::toJSON(topic), ",",
                         sep="")
-        if (i==nrow(topics)) start <- paste(start, rjson::toJSON(topic), "]", sep="")
+        if (i==nrow(topics)) start <- paste(start, jsonlite::toJSON(topic), "]", sep="")
     }
     fileConn2 <- file("topics.js")
     writeLines(start, fileConn2)
